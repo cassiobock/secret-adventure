@@ -46,5 +46,5 @@ Secret Adventure
 **Agentes de saúde**
 - Não são picados
 - Perseguem mosquitos
-- Se estiverem ao lado de um mosquito, borrifam spray e o mata
+- Se estiverem ao lado de um mosquito, borrifam spray e o matam
 - Mata um mosquito por vez
