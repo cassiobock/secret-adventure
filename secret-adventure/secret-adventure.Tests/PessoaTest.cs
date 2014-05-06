@@ -37,7 +37,7 @@ namespace secret_adventure.Test
             Pessoa pessoa = new Pessoa(new Point(1, 2));
             PessoaManager manager = new PessoaManager(pessoa);
 
-            manager.InternalMorrer();
+            manager.Morrer();
             
             Assert.IsFalse(pessoa.Ativo);
         }

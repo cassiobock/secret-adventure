@@ -8,7 +8,7 @@ using System.Web;
 
 namespace secret_adventure.Models.Manager
 {
-    public class PessoaManager
+    public class PessoaManager : IManager
     {
         private Pessoa Pessoa;
 
@@ -58,14 +58,21 @@ namespace secret_adventure.Models.Manager
             }
         }
 
-        private void Morrer()
+        /// <summary>
+        /// Desativa a pessoa
+        /// </summary>
+        public void Morrer()
         {
-            this.Pessoa.Ativo = false;
+            new EntidadeManager(this.Pessoa).Morrer();
         }
 
-        internal void InternalMorrer()
+        /// <summary>
+        /// Move o personagem
+        /// </summary>
+        /// <param name="novaPosicao"></param>
+        public void Mover(Point novaPosicao)
         {
-            this.Pessoa.Ativo = false;
+            new EntidadeManager(this.Pessoa).Mover(novaPosicao);
         }
     }
 }

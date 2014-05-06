@@ -16,7 +16,7 @@ namespace secret_adventure.Tests
             Point posicaoOriginal = new Point(0, 1);
             Point novaPosicao = new Point(0, 2);
             Agente agente = new Agente(posicaoOriginal);
-            EntidadeManager manager = new EntidadeManager(agente);
+            AgenteManager manager = new AgenteManager(agente);
 
             manager.Mover(novaPosicao);
 
@@ -27,9 +27,10 @@ namespace secret_adventure.Tests
         public void AgenteDeveMatarMosquitoMacho()
         {
             MosquitoMacho mosquito = new MosquitoMacho(new Point(1, 2));
-            EntidadeManager manager = new EntidadeManager(mosquito);
+            Agente agente = new Agente(new Point(1, 1));
+            AgenteManager manager = new AgenteManager(agente);
 
-            manager.Morrer();
+            manager.MatarMosquito(mosquito);
 
             Assert.IsFalse(mosquito.Ativo);
         }
@@ -38,9 +39,10 @@ namespace secret_adventure.Tests
         public void AgenteDeveMatarMosquitoFemea()
         {
             MosquitoFemea mosquito = new MosquitoFemea(new Point(1, 2));
-            EntidadeManager manager = new EntidadeManager(mosquito);
+            Agente agente = new Agente(new Point(1, 1));
+            AgenteManager manager = new AgenteManager(agente);
 
-            manager.Morrer();
+            manager.MatarMosquito(mosquito);
 
             Assert.IsFalse(mosquito.Ativo);
         }

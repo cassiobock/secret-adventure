@@ -6,7 +6,7 @@ using System.Web;
 
 namespace secret_adventure.Models.Manager
 {
-    public class EntidadeManager
+    public class EntidadeManager : IManager
     {
         private Entidade Entidade;
 
