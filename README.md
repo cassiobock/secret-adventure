@@ -17,13 +17,13 @@ Secret Adventure
 
 **Mosquitos**
 - Quatro tipos: 
-	- ovo
-	- pupa
-	- larva
-	- adulto
+	- ~~ovo~~
+	- ~~pupa~~
+	- ~~larva~~
+	- ~~adulto~~
 - Sexos: 
-	- Masculino
-	- Feminino
+	- ~~Masculino~~
+	- ~~Feminino~~
 - Picam apenas pessoas
 - Mosquitos fogem dos agentes
 - Diferenciar masculinos e feminino
@@ -31,11 +31,11 @@ Secret Adventure
 - Somente após ter picado (com sangue) que pode ocorrer o acasalamento
 - A dengue é transmitida através do acasalamento e mosquitos pais
 - Tipos de mosquito:
-	- Infecção Inaparente
-	- Dengue Clássica
-	- Dengue Hemorrágica
-	- Síndrome de Choque da Dengue
-	- Nenhum
+	- ~~Infecção Inaparente~~
+	- ~~Dengue Clássica~~
+	- ~~Dengue Hemorrágica~~
+	- ~~Síndrome de Choque da Dengue~~
+	- ~~Nenhum~~
 - 20 rodadas e depois morre
 - Fêmea só põe ovos com sangue
 - Mosquitos perseguem pessoas
