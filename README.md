@@ -8,22 +8,22 @@ Secret Adventure
 	
 **Pessoas**
 - Se doente, deve ter outro ícone
-- Não pegam o mesmo tipo de dengue que já tiveram
-- Não podem ter duas dengues ao mesmo tempo
-- Chance de 50% de morrer se a dengue for hemorrágica
+- ~~Não pegam o mesmo tipo de dengue que já tiveram~~
+- ~~Não podem ter duas dengues ao mesmo tempo~~
+- ~~Chance de 50% de morrer se a dengue for hemorrágica~~
 - Fogem de mosquitos
 - Ficam 8 rodadas doentes
 
 
 **Mosquitos**
 - Quatro tipos: 
-	- ovo
-	- pupa
-	- larva
-	- adulto
+	- ~~ovo~~
+	- ~~pupa~~
+	- ~~larva~~
+	- ~~adulto~~
 - Sexos: 
-	- Masculino
-	- Feminino
+	- ~~Masculino~~
+	- ~~Feminino~~
 - Picam apenas pessoas
 - Mosquitos fogem dos agentes
 - Diferenciar masculinos e feminino
@@ -31,11 +31,11 @@ Secret Adventure
 - Somente após ter picado (com sangue) que pode ocorrer o acasalamento
 - A dengue é transmitida através do acasalamento e mosquitos pais
 - Tipos de mosquito:
-	- Infecção Inaparente
-	- Dengue Clássica
-	- Dengue Hemorrágica
-	- Síndrome de Choque da Dengue
-	- Nenhum
+	- ~~Infecção Inaparente~~
+	- ~~Dengue Clássica~~
+	- ~~Dengue Hemorrágica~~
+	- ~~Síndrome de Choque da Dengue~~
+	- ~~Nenhum~~
 - 20 rodadas e depois morre
 - Fêmea só põe ovos com sangue
 - Mosquitos perseguem pessoas
@@ -47,4 +47,4 @@ Secret Adventure
 - Não são picados
 - Perseguem mosquitos
 - Se estiverem ao lado de um mosquito, borrifam spray e o matam
-- Mata um mosquito por vez
+- ~~Mata um mosquito por vez~~
