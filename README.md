@@ -8,9 +8,9 @@ Secret Adventure
 	
 **Pessoas**
 - Se doente, deve ter outro ícone
-- Não pegam o mesmo tipo de dengue que já tiveram
-- Não podem ter duas dengues ao mesmo tempo
-- Chance de 50% de morrer se a dengue for hemorrágica
+- ~~Não pegam o mesmo tipo de dengue que já tiveram~~
+- ~~Não podem ter duas dengues ao mesmo tempo~~
+- ~~Chance de 50% de morrer se a dengue for hemorrágica~~
 - Fogem de mosquitos
 - Ficam 8 rodadas doentes
 
@@ -47,4 +47,4 @@ Secret Adventure
 - Não são picados
 - Perseguem mosquitos
 - Se estiverem ao lado de um mosquito, borrifam spray e o matam
-- Mata um mosquito por vez
+- ~~Mata um mosquito por vez~~
