@@ -1,21 +1,21 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using secret_adventure.Models.Base;
 using System.Drawing;
+using secret_adventure.Models.Base;
 using secret_adventure.Models.Manager;
 
 namespace secret_adventure.Tests
 {
     [TestClass]
-    public class MosquitoMachoTest
+    public class MosquitoFemeaTest
     {
         [TestMethod]
         public void MosquitoDeveSeMover()
         {
-            Point posicaoOriginal = new Point(1,1);
-            Point novaPosicao = new Point(1,2);
-            MosquitoMacho mosquito = new MosquitoMacho(posicaoOriginal);
-            MosquitoMachoManager manager = new MosquitoMachoManager(mosquito);
+            Point posicaoOriginal = new Point(1, 1);
+            Point novaPosicao = new Point(1, 2);
+            MosquitoFemea mosquito = new MosquitoFemea(posicaoOriginal);
+            MosquitoFemeaManager manager = new MosquitoFemeaManager(mosquito);
 
             manager.Mover(novaPosicao);
 
@@ -25,8 +25,8 @@ namespace secret_adventure.Tests
         [TestMethod]
         public void MosquitoDeveMorrer()
         {
-            MosquitoMacho mosquito = new MosquitoMacho(new Point(1, 2));
-            MosquitoMachoManager manager = new MosquitoMachoManager(mosquito);
+            MosquitoFemea mosquito = new MosquitoFemea(new Point(1, 2));
+            MosquitoFemeaManager manager = new MosquitoFemeaManager(mosquito);
 
             manager.Morrer();
 
@@ -36,8 +36,8 @@ namespace secret_adventure.Tests
         [TestMethod]
         public void MosquitoDeveFicarMaisVelho()
         {
-            MosquitoMacho mosquito = new MosquitoMacho(new Point(1, 2));
-            MosquitoMachoManager manager = new MosquitoMachoManager(mosquito);
+            MosquitoFemea mosquito = new MosquitoFemea(new Point(1, 2));
+            MosquitoFemeaManager manager = new MosquitoFemeaManager(mosquito);
             int rodadasAntes = mosquito.TempoDeVida;
 
             manager.Envelhecer();
