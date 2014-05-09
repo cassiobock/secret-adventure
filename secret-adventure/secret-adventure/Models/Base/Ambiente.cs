@@ -10,7 +10,7 @@ namespace secret_adventure.Models.Base
 {
     public class Ambiente
     {
-        public List<Entidade> Entidades;
+        public List<Entidade> Entidades = new List<Entidade>();
         public int Linhas;
         public int Colunas;
         public List<Entidade> PersonagensQueSeraoAdicionados = new List<Entidade>();
