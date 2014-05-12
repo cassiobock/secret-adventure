@@ -35,5 +35,6 @@ namespace secret_adventure.Models.Manager
         {
             this.Entidade.Ativo = false;
         }
+
     }
 }

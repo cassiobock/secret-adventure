@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using secret_adventure.Models.Base;
 using secret_adventure.Models;
 using secret_adventure.Models.Manager;
+using System.Collections.Generic;
+using System.Drawing;
+using secret_adventure.Models.Factory;
+using secret_adventure.Models.Other;
 
 namespace secret_adventure.Tests
 {
@@ -65,6 +71,52 @@ namespace secret_adventure.Tests
             }
 
             Assert.AreEqual(quantidadeDeEntidades, ambiente.Entidades.Count);
+        }
+
+        [TestMethod]
+        public void AmbienteDeveRetornarListaDeEntidadesProximas()
+        {
+            List<Entidade> entidades = new AmbienteManager(ambiente).GetEntidadesProximas(ambiente.Entidades.First(), 1);
+
+            bool localizou = ambiente.Entidades.Contains(entidades.FirstOrDefault());
+
+            Assert.IsTrue(localizou);
+        }
+
+        [TestMethod]
+        public void AmbienteDeveRetornarUmaPosicaoVazia()
+        {
+            List<Point> posicoesVazias = new AmbienteManager(ambiente).GetPosicoesVazias(ambiente.Entidades.First());
+
+            bool posicaoEstaVazia = ambiente.Entidades.Where(m => m.Posicao == posicoesVazias.First()).Count() == 0 ? true : false;
+
+            Assert.IsTrue(posicaoEstaVazia);
+        }
+
+        [TestMethod]
+        public void AmbienteDeveAdicionarNovasEntidades()
+        {
+            List<Entidade> entidadeQueSeraoAdicionadas = new List<Entidade>()
+            {
+                EntidadeFactory.CriaTipoPersonagem(TipoClasse.Pessoa, new AmbienteManager(ambiente).GetPosicoesVazias(ambiente.Entidades.First()).First())
+            };
+
+            new AmbienteManager(ambiente).AdicionarEntidades(entidadeQueSeraoAdicionadas);
+            new AmbienteManager(ambiente).Processar();
+
+            Assert.IsTrue(ambiente.Entidades.Contains(entidadeQueSeraoAdicionadas.First()));
+        }
+
+        [TestMethod]
+        public void AmbienteDeveRemoverEntidadesDesativadas()
+        {
+            Entidade entidade = ambiente.Entidades.First();
+            
+            new EntidadeManager(entidade).Morrer();
+            new AmbienteManager(ambiente).Processar();
+            bool entidadeFoiRemovida = ambiente.Entidades.Contains(entidade);
+
+            Assert.IsFalse(entidadeFoiRemovida);
         }
     }
 }

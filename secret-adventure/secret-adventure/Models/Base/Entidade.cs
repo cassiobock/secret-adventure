@@ -21,5 +21,13 @@ namespace secret_adventure.Models
             this.Posicao = posicao;
             this.Ativo = true;
         }
+        public int GetLinha()
+        {
+            return this.Posicao.X;
+        }
+        public int GetColuna()
+        {
+            return this.Posicao.Y;
+        }
     }
 }
