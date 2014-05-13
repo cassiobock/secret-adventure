@@ -1,10 +1,42 @@
-﻿@model secret_adventure.Models.Entidade[,]
+﻿@using secret_adventure.Models.Other
+@using secret_adventure.Models.Base
+@model secret_adventure.Models.Entidade[,]
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ambiente";
 }
 
-<h2>Index</h2>
-<table border="1" class="table">
+@helper ImprimeEntidade(secret_adventure.Models.Entidade entidade)
+{
+    if (true)
+    {
+        if (entidade.TipoEntidade == TipoClasse.Agente)
+        {
+            <td class="success">@entidade.TipoEntidade.ToString()</td>
+        }
+        else if (entidade.TipoEntidade == TipoClasse.MosquitoFemea)
+        {
+            <td class="danger">@entidade.TipoEntidade.ToString()</td>
+        }
+        else if (entidade.TipoEntidade == TipoClasse.MosquitoMacho)
+        {
+            <td class="info">@entidade.TipoEntidade.ToString()</td>
+        }
+        else if (entidade.TipoEntidade == TipoClasse.Pessoa)
+        {
+            if ((@entidade as secret_adventure.Models.Pessoa).Saudavel == true)
+            {
+                <td class="active">@entidade.TipoEntidade.ToString()</td>
+            }
+            else
+            {
+                <td class="warning">@entidade.TipoEntidade.ToString()</td>
+            }
+        }
+    }
+}
+
+<h2>Ambiente</h2>
+<table border="1" class="table table-bordered">
     @for (int linha = 0; linha < Model.GetLength(0); linha++)
     {
         <tr>
@@ -12,7 +44,7 @@
             {
                 if (Model[linha, coluna] != null)
                 {
-                    <td>@Model[linha, coluna].TipoEntidade.ToString()</td>
+                    @ImprimeEntidade(Model[linha, coluna])
                 }
                 else
                 {
@@ -22,4 +54,7 @@
         </tr>
     }
 </table>
-@Html.ActionLink("Mover", "Mover")
+<p>
+    @Html.ActionLink("Reiniciar", "Index", "Home", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Mover", "Mover", null, new { @class = "btn btn-default" })
+</p>
