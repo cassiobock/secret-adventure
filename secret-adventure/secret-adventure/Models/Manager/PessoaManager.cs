@@ -1,4 +1,6 @@
 ﻿using Dengue.Models.Outra;
+using secret_adventure.Models.Base;
+using secret_adventure.Models.Etc;
 using secret_adventure.Models.Other;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,53 @@ namespace secret_adventure.Models.Manager
         public PessoaManager(Pessoa pessoa)
         {
             this.Pessoa = pessoa;
+        }
+
+        /// <summary>
+        /// Executa as ações da pessoa
+        /// </summary>
+        public void Agir()
+        {
+            this.Curar();
+            if (this.Pessoa.Ativo == true)
+            {
+                bool houveInteracao = false;
+                List<Entidade> entidadesProximas;
+                AmbienteManager ambiente = new AmbienteManager(Singleton.GetInstance());
+                for (int nivel = 1; nivel <= 3; nivel++)
+                {
+                    entidadesProximas = ambiente.GetEntidadesProximas(this.Pessoa, nivel);
+                    foreach (var entidade in entidadesProximas)
+                    {
+                        if (entidade is Mosquito)
+                        {
+                            this.Fugir(entidade);
+                            houveInteracao = true;
+                        }
+                    }
+                }
+                if (houveInteracao == false)
+                {
+                    new EntidadeManager(this.Pessoa).Vagar(ambiente.GetPosicoesProximasVazias(this.Pessoa));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Desativa a pessoa
+        /// </summary>
+        public void Morrer()
+        {
+            new EntidadeManager(this.Pessoa).Morrer();
+        }
+
+        /// <summary>
+        /// Move o personagem
+        /// </summary>
+        /// <param name="novaPosicao"></param>
+        public void Mover(Point novaPosicao)
+        {
+            new EntidadeManager(this.Pessoa).Mover(novaPosicao);
         }
 
         /// <summary>
@@ -59,20 +108,33 @@ namespace secret_adventure.Models.Manager
         }
 
         /// <summary>
-        /// Desativa a pessoa
+        /// Cura a pessoa doente
         /// </summary>
-        public void Morrer()
+        public void Curar()
         {
-            new EntidadeManager(this.Pessoa).Morrer();
+            if (this.Pessoa.Saudavel == false)
+            {
+                switch (this.Pessoa.RodadasDoente)
+                {
+                    // Se já passou 8 rodadas, torna a pessoa saldavel
+                    case 0:
+                        this.Pessoa.Saudavel = true;
+                        break;
+                    default: // Diminui o número de rodadas doente
+                        this.Pessoa.RodadasDoente--;
+                        break;
+                }
+            }
         }
 
         /// <summary>
-        /// Move o personagem
+        /// Foge de uma entidade
         /// </summary>
-        /// <param name="novaPosicao"></param>
-        public void Mover(Point novaPosicao)
+        /// <param name="entidade">Entidade da qual fugir</param>
+        /// <returns></returns>
+        public bool Fugir(Entidade entidade)
         {
-            new EntidadeManager(this.Pessoa).Mover(novaPosicao);
+            return new EntidadeManager(this.Pessoa).MoverPara(entidade, false);
         }
     }
 }

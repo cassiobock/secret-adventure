@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace secret_adventure.Models
 {
-    interface IManager
+    public interface IManager
     {
         void Mover(Point novaPosicao);
+        void Agir();
         void Morrer();
     }
 }

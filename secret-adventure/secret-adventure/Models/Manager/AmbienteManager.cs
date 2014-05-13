@@ -113,7 +113,7 @@ namespace secret_adventure.Models.Manager
         /// </summary>
         /// <param name="entidade">Entidade a partir de onde deve-se verificar</param>
         /// <returns></returns>
-        public List<Point> GetPosicoesVazias(Entidade entidade)
+        public List<Point> GetPosicoesProximasVazias(Entidade entidade)
         {
             Entidade[,] matriz = this.GetMatriz();
             // Se que 0, define zero como limite, caso contrário pega o valor e subtrai o número de níveis desejados
@@ -159,6 +159,9 @@ namespace secret_adventure.Models.Manager
             this.GetListaEntidades().Remove(entidade);
         }
 
+        /// <summary>
+        /// Remove entidades desativadas e adiciona novas enidades na fila
+        /// </summary>
         public void Processar()
         {
             List<Entidade> itensRemovidos = this.GetListaEntidades().Where(m => m.Ativo == false).ToList();

@@ -1,4 +1,5 @@
 ﻿using secret_adventure.Models.Base;
+using secret_adventure.Models.Etc;
 using secret_adventure.Models.Interface;
 using secret_adventure.Models.Other;
 using System;
@@ -27,7 +28,51 @@ namespace secret_adventure.Models.Manager
         /// </summary>
         public void Agir()
         {
-            throw new NotImplementedException();
+            this.Envelhecer();
+            bool houveInteracao = false;
+            if (this.MosquitoMacho.Estagio == Estagio.Adulto && this.MosquitoMacho.Ativo == true)
+            {
+                List<Entidade> entidadesProximas;
+                AmbienteManager ambiente = new AmbienteManager(Singleton.GetInstance());
+                entidadesProximas = ambiente.GetEntidadesProximas(this.MosquitoMacho, 1);
+                foreach (var personagem in entidadesProximas)
+                {
+                    if (personagem is Agente && houveInteracao == false)
+                    {
+                        this.Fugir(personagem as Agente);
+                        houveInteracao = true;
+                    }
+                    else if (personagem is MosquitoFemea && houveInteracao == false)
+                    {
+                        this.Acasalar(personagem as MosquitoFemea);
+                        houveInteracao = true;
+                    }
+                }
+                if (houveInteracao == false)
+                {
+                    for (int nivel = 2; nivel <= 3; nivel++)
+                    {
+                        entidadesProximas = ambiente.GetEntidadesProximas(this.MosquitoMacho, nivel);
+                        foreach (var personagem in entidadesProximas)
+                        {
+                            if (personagem is Agente && houveInteracao == false)
+                            {
+                                this.Fugir(personagem as Agente);
+                                houveInteracao = true;
+                            }
+                            else if (personagem is MosquitoFemea && houveInteracao == false && ((MosquitoFemea)personagem).ComFome == false)
+                            {
+                                this.Perseguir(personagem as MosquitoFemea);
+                                houveInteracao = true;
+                            }
+                        }
+                    }
+                }
+                if (houveInteracao == false)
+                {
+                    new EntidadeManager(this.MosquitoMacho).Vagar(ambiente.GetPosicoesProximasVazias(this.MosquitoMacho));
+                }
+            }
         }
 
         /// <summary>
@@ -89,13 +134,25 @@ namespace secret_adventure.Models.Manager
         }
 
         /// <summary>
+        /// Reproduz o mosquito
+        /// </summary>
+        /// <param name="mosquitoFemea"></param>
+        public void Acasalar(MosquitoFemea mosquitoFemea)
+        {
+            if (mosquitoFemea.ComFome == false)
+            {
+                new MosquitoFemeaManager(mosquitoFemea).Acasalar(this.MosquitoMacho);
+            }
+        }
+
+        /// <summary>
         /// Foge de agentes
         /// </summary>
         /// <param name="agente">Agente do qual fugir</param>
         /// <returns></returns>
-        public bool Fugir(Agente agente)
+        public bool Fugir(Entidade entidade)
         {
-            throw new NotImplementedException();
+            return new EntidadeManager(this.MosquitoMacho).MoverPara(entidade, false);
         }
 
         /// <summary>
@@ -105,7 +162,7 @@ namespace secret_adventure.Models.Manager
         /// <returns></returns>
         public bool Perseguir(Entidade entidade)
         {
-            throw new NotImplementedException();
+            return new EntidadeManager(this.MosquitoMacho).MoverPara(entidade);
         }
     }
 }

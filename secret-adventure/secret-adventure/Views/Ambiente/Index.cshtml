@@ -1,0 +1,25 @@
+﻿@model secret_adventure.Models.Entidade[,]
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table border="1" class="table">
+    @for (int linha = 0; linha < Model.GetLength(0); linha++)
+    {
+        <tr>
+            @for (int coluna = 0; coluna < Model.GetLength(1); coluna++)
+            {
+                if (Model[linha, coluna] != null)
+                {
+                    <td>@Model[linha, coluna].TipoEntidade.ToString()</td>
+                }
+                else
+                {
+                    <td>[@linha,@coluna]</td>
+                }
+            }
+        </tr>
+    }
+</table>
+@Html.ActionLink("Mover", "Mover")

@@ -11,7 +11,7 @@ namespace secret_adventure.Models.Interface
     {
         void Agir();
         void Envelhecer();
-        bool Fugir(Agente agente);
+        bool Fugir(Entidade entidade);
         bool Perseguir(Entidade entidade);
     }
 }

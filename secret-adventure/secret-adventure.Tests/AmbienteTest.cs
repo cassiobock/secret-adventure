@@ -86,7 +86,7 @@ namespace secret_adventure.Tests
         [TestMethod]
         public void AmbienteDeveRetornarUmaPosicaoVazia()
         {
-            List<Point> posicoesVazias = new AmbienteManager(ambiente).GetPosicoesVazias(ambiente.Entidades.First());
+            List<Point> posicoesVazias = new AmbienteManager(ambiente).GetPosicoesProximasVazias(ambiente.Entidades.First());
 
             bool posicaoEstaVazia = ambiente.Entidades.Where(m => m.Posicao == posicoesVazias.First()).Count() == 0 ? true : false;
 
@@ -98,7 +98,7 @@ namespace secret_adventure.Tests
         {
             List<Entidade> entidadeQueSeraoAdicionadas = new List<Entidade>()
             {
-                EntidadeFactory.CriaTipoPersonagem(TipoClasse.Pessoa, new AmbienteManager(ambiente).GetPosicoesVazias(ambiente.Entidades.First()).First())
+                EntidadeFactory.CriaTipoPersonagem(TipoClasse.Pessoa, new AmbienteManager(ambiente).GetPosicoesProximasVazias(ambiente.Entidades.First()).First())
             };
 
             new AmbienteManager(ambiente).AdicionarEntidades(entidadeQueSeraoAdicionadas);

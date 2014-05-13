@@ -1,4 +1,6 @@
-﻿using secret_adventure.Models.Base;
+﻿using Dengue.Models.Outra;
+using secret_adventure.Models.Base;
+using secret_adventure.Models.Etc;
 using secret_adventure.Models.Interface;
 using secret_adventure.Models.Other;
 using System;
@@ -27,7 +29,61 @@ namespace secret_adventure.Models.Manager
         /// </summary>
         public void Agir()
         {
-            throw new NotImplementedException();
+            this.Envelhecer();
+            bool houveInteracao = false;
+            if (this.MosquitoFemea.Estagio == Estagio.Adulto && this.MosquitoFemea.Ativo == true)
+            {
+                List<Entidade> entidadesProximas;
+                AmbienteManager ambiente = new AmbienteManager(Singleton.GetInstance());
+                entidadesProximas = ambiente.GetEntidadesProximas(this.MosquitoFemea, 1);
+                foreach (var personagem in entidadesProximas)
+                {
+                    if (personagem is Agente && houveInteracao == false)
+                    {
+                        this.Fugir(personagem as Agente);
+                        houveInteracao = true;
+                    }
+                    else if (personagem is Pessoa && this.MosquitoFemea.ComFome == true && houveInteracao == false)
+                    {
+                        this.Picar(personagem as Pessoa);
+                        houveInteracao = true;
+                    }
+                    else if (personagem is MosquitoMacho && this.MosquitoFemea.ComFome == false && houveInteracao == false)
+                    {
+                        this.Acasalar(personagem as MosquitoMacho);
+                        houveInteracao = true;
+                    }
+                }
+                if (houveInteracao == false)
+                {
+                    for (int nivel = 2; nivel <= 3; nivel++)
+                    {
+                        entidadesProximas = ambiente.GetEntidadesProximas(this.MosquitoFemea, nivel);
+                        foreach (var personagem in entidadesProximas)
+                        {
+                            if (personagem is Agente && houveInteracao == false)
+                            {
+                                this.Fugir(personagem as Agente);
+                                houveInteracao = true;
+                            }
+                            else if (personagem is Pessoa && this.MosquitoFemea.ComFome == true && houveInteracao == false)
+                            {
+                                this.Perseguir(personagem as Pessoa);
+                                houveInteracao = true;
+                            }
+                            else if (personagem is MosquitoMacho && this.MosquitoFemea.ComFome == false && houveInteracao == false)
+                            {
+                                this.Perseguir(personagem as MosquitoMacho);
+                                houveInteracao = true;
+                            }
+                        }
+                    }
+                }
+                if (houveInteracao == false)
+                {
+                    new EntidadeManager(this.MosquitoFemea).Vagar(ambiente.GetPosicoesProximasVazias(this.MosquitoFemea));
+                }
+            }
         }
 
         /// <summary>
@@ -47,6 +103,9 @@ namespace secret_adventure.Models.Manager
             new EntidadeManager(this.MosquitoFemea).Morrer();
         }
 
+        /// <summary>
+        /// Torna o mosquito mais velho e eventualmente o mata
+        /// </summary>
         public void Envelhecer()
         {
             // Verifica se o mosquito é adulto
@@ -86,13 +145,73 @@ namespace secret_adventure.Models.Manager
         }
 
         /// <summary>
+        /// Pica uma pessoa e tenta transmitir a dengue
+        /// </summary>
+        /// <param name="pessoa">Pessoa que será picada</param>
+        public void Picar(Pessoa pessoa)
+        {
+            new PessoaManager(pessoa).SerPicada(this.MosquitoFemea.TipoDengue);
+            this.MosquitoFemea.ComFome = false;
+        }
+
+        /// <summary>
+        /// Reproduz o mosquito
+        /// </summary>
+        /// <param name="mosquitoMacho">MosquitoMacho parceiro para o acasalamento</param>
+        public void Acasalar(MosquitoMacho mosquitoMacho)
+        {
+            if (this.MosquitoFemea.TipoDengue == TipoDengue.Nenhuma && mosquitoMacho.TipoDengue == TipoDengue.Nenhuma)
+            {
+                mosquitoMacho.TipoDengue = this.MosquitoFemea.TipoDengue;
+                this.PorOvos(mosquitoMacho, TipoDengue.Nenhuma);
+            }
+            else if (this.MosquitoFemea.TipoDengue == TipoDengue.Nenhuma)
+            {
+                this.MosquitoFemea.TipoDengue = mosquitoMacho.TipoDengue;
+                this.PorOvos(mosquitoMacho, mosquitoMacho.TipoDengue);
+            }
+            else if (mosquitoMacho.TipoDengue == TipoDengue.Nenhuma)
+            {
+                mosquitoMacho.TipoDengue = this.MosquitoFemea.TipoDengue;
+                this.PorOvos(mosquitoMacho, this.MosquitoFemea.TipoDengue);
+            }
+            else
+            {
+                TipoDengue tipoDengue = Util.GetRandom(2) % 2 == 0 ? mosquitoMacho.TipoDengue : this.MosquitoFemea.TipoDengue;
+                this.PorOvos(mosquitoMacho, tipoDengue);
+            }
+            this.MosquitoFemea.ComFome = true;
+        }
+
+        /// <summary>
+        /// Põe ovos no mapa
+        /// </summary>
+        /// <param name="parceiro">Parceiro para reprodução</param>
+        /// <param name="dengueHereditaria">Tipo de dengue dos filhotes</param>
+        public void PorOvos(MosquitoMacho parceiro, TipoDengue dengueHereditaria)
+        {
+            AmbienteManager ambiente = new AmbienteManager(Singleton.GetInstance());
+            List<Point> posicoes = ambiente.GetPosicoesProximasVazias(this.MosquitoFemea);
+            List<Entidade> entidades = new List<Entidade>();
+            foreach (var posicao in posicoes)
+            {
+                //Gera um sexo aleatório: masculino ou feminino
+                bool macho = Util.GetRandom(2) % 2 == 0 ? true : false;
+                //Cria um personagem de acordo com o sexo
+                Mosquito personagem = macho == true ? (Mosquito)new MosquitoMacho(posicao, Estagio.Ovo, dengueHereditaria) : (Mosquito)new MosquitoFemea(posicao, Estagio.Ovo, dengueHereditaria);
+                entidades.Add(personagem);
+            }
+            ambiente.AdicionarEntidades(entidades);
+        }
+
+        /// <summary>
         /// Foge de agentes
         /// </summary>
         /// <param name="agente">Agente do qual fugir</param>
         /// <returns></returns>
-        public bool Fugir(Agente agente)
+        public bool Fugir(Entidade entidade)
         {
-            throw new NotImplementedException();
+            return new EntidadeManager(this.MosquitoFemea).MoverPara(entidade, false);
         }
 
         /// <summary>
@@ -102,7 +221,7 @@ namespace secret_adventure.Models.Manager
         /// <returns></returns>
         public bool Perseguir(Entidade entidade)
         {
-            throw new NotImplementedException();
+            return new EntidadeManager(this.MosquitoFemea).MoverPara(entidade);
         }
     }
 }
