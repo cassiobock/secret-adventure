@@ -18,7 +18,7 @@ namespace secret_adventure.Models.Base
         public Mosquito(Point posicao)
             : base(posicao)
         {
-            this.Estagio = (Estagio)Enum.GetValues(typeof(Estagio)).GetValue(Util.GetRandom(Enum.GetValues(typeof(Estagio)).Length));
+            this.Estagio = Estagio.Adulto;
             this.TipoDengue = (TipoDengue)Enum.GetValues(typeof(TipoDengue)).GetValue(Util.GetRandom(Enum.GetValues(typeof(TipoDengue)).Length));
             this.TempoDeVida = 20;
         }
