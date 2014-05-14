@@ -1,0 +1,64 @@
+﻿.background-agente {
+    background-image: url('Image/agente.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-pessoa {
+    background-image: url('Image/pessoa.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-pessoa-doente {
+    background-image: url('Image/pessoDoente.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.background-ovo {
+    background-image: url('Image/ovo.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-pupa {
+    background-image: url('Image/pupa.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-larva {
+    background-image: url('Image/larva.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-adulto-macho {
+    background-image: url('Image/mosquitoAdultoMacho.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-adulto-femea {
+    background-image: url('Image/mosquitoAdutoFemea.png');
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

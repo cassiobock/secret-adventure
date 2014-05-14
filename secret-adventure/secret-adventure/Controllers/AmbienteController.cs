@@ -29,14 +29,14 @@ namespace secret_adventure.Controllers
             List<Entidade> entidadesQueJaRealizaramAcao = new List<Entidade>();
             foreach (Entidade entidade in manager.GetListaEntidades())
             {
-                if (entidadesQueJaRealizaramAcao.Where(p => p.Id == entidade.Id).Count() == 0 && entidade.Ativo == true)
+                if (entidadesQueJaRealizaramAcao.Contains(entidade) == false && entidade.Ativo == true)
                 {
                     entidadesQueJaRealizaramAcao.Add(entidade);
                     new EntidadeManager(entidade).Agir();
                 }
             }
             manager.Processar();
-            return View(manager.GetMatriz());
+            return PartialView("RenderEntidades", manager.GetMatriz());
         }
     }
 }

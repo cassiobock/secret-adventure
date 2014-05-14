@@ -175,9 +175,8 @@ namespace secret_adventure.Models.Manager
                 {
                     this.GetListaEntidades().Add(entidade);
                 }
+                this.Ambiente.EntidadesQueSeraoAdicionadas.Clear();
             }
         }
-
-
     }
 }

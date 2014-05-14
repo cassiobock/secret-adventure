@@ -23,7 +23,10 @@ namespace secret_adventure.Controllers
         [HttpPost]
         public ActionResult Index(AmbienteViewModel model)
         {
-            Singleton.SetInstance(new Ambiente(model.Linhas, model.Colunas, model.NumeroMosquitos, model.NumeroPessoas, model.NumeroAgentes));
+            if (ModelState.IsValid)
+            {
+                Singleton.SetInstance(new Ambiente(model.Linhas, model.Colunas, model.NumeroMosquitos, model.NumeroPessoas, model.NumeroAgentes));
+            }
             return RedirectToAction("Index", "Ambiente");
         }
     }

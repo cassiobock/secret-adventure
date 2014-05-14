@@ -1,60 +1,30 @@
-﻿@using secret_adventure.Models.Other
-@using secret_adventure.Models.Base
-@model secret_adventure.Models.Entidade[,]
+﻿@model secret_adventure.Models.Entidade[,]
 @{
     ViewBag.Title = "Ambiente";
 }
 
-@helper ImprimeEntidade(secret_adventure.Models.Entidade entidade)
+<h2>Ambiente</h2>
+<p>
+    <button class="btn btn-success " id="mover">Mover</button>
+    @Html.ActionLink("Reiniciar", "Index", "Home", null, new { @class = "btn btn-warning" })
+</p>
+@if (Model != null)
 {
-    if (true)
-    {
-        if (entidade.TipoEntidade == TipoClasse.Agente)
-        {
-            <td class="success">@entidade.TipoEntidade.ToString()</td>
-        }
-        else if (entidade.TipoEntidade == TipoClasse.MosquitoFemea)
-        {
-            <td class="danger">@entidade.TipoEntidade.ToString()</td>
-        }
-        else if (entidade.TipoEntidade == TipoClasse.MosquitoMacho)
-        {
-            <td class="info">@entidade.TipoEntidade.ToString()</td>
-        }
-        else if (entidade.TipoEntidade == TipoClasse.Pessoa)
-        {
-            if ((@entidade as secret_adventure.Models.Pessoa).Saudavel == true)
-            {
-                <td class="active">@entidade.TipoEntidade.ToString()</td>
-            }
-            else
-            {
-                <td class="warning">@entidade.TipoEntidade.ToString()</td>
-            }
-        }
-    }
+    <div id='ambiente'>
+        @{ Html.RenderPartial("RenderEntidades", Model); }
+    </div>
 }
 
-<h2>Ambiente</h2>
-<table border="1" class="table table-bordered">
-    @for (int linha = 0; linha < Model.GetLength(0); linha++)
-    {
-        <tr>
-            @for (int coluna = 0; coluna < Model.GetLength(1); coluna++)
-            {
-                if (Model[linha, coluna] != null)
-                {
-                    @ImprimeEntidade(Model[linha, coluna])
-                }
-                else
-                {
-                    <td>[@linha,@coluna]</td>
-                }
-            }
-        </tr>
-    }
-</table>
-<p>
-    @Html.ActionLink("Reiniciar", "Index", "Home", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Mover", "Mover", null, new { @class = "btn btn-default" })
-</p>
+<script>
+    $(document).ready(function () {
+        $("#mover").on("click", function () {
+            $.ajax({
+                url: "/Ambiente/Mover",
+                type: "GET"
+            })
+            .done(function (partialViewResult) {
+                $("#ambiente").html(partialViewResult);
+            });
+        });
+    });
+</script>
