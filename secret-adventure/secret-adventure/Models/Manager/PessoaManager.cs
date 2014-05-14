@@ -74,7 +74,7 @@ namespace secret_adventure.Models.Manager
         /// Deixa a pessoa doente e adiciona o tipo de dengue a lista de doenças contraidas
         /// </summary>
         /// <param name="tipoDengue"></param>
-        private void PegarDengue(Other.TipoDengue tipoDengue)
+        private void PegarDengue(TipoDengue tipoDengue)
         {
             // Se for dengue Hemorragica, gera random de 0 a 1, se for par, a pessoa irá morrer. Impar não morre
             if (tipoDengue == TipoDengue.Hemorragica && Util.GetRandom(2) % 2 == 0 ? true : false)
