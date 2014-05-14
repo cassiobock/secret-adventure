@@ -1,0 +1,64 @@
+﻿@using secret_adventure.Models.Other
+@using secret_adventure.Models.Base
+@model secret_adventure.Models.Entidade[,]
+@helper ImprimeEntidade(secret_adventure.Models.Entidade entidade)
+{
+    if (entidade.TipoEntidade == TipoClasse.Agente)
+    {
+        <td class="background-agente" width="48px" height="48px"></td>
+    }
+    else if (entidade.TipoEntidade == TipoClasse.Pessoa)
+    {
+        if ((@entidade as secret_adventure.Models.Pessoa).Saudavel == true)
+        {
+            <td class="background-pessoa" width="48px" height="48px"></td>
+        }
+        else
+        {
+            <td class="warning background-pessoa-doente" width="48px" height="48px"></td>
+        }
+    }
+    else if (entidade is Mosquito)
+    {
+        if ((entidade as Mosquito).Estagio == Estagio.Ovo)
+        {
+            <td class="background-ovo" width="48px" height="48px"></td>
+        }
+        else if ((entidade as Mosquito).Estagio == Estagio.Pupa)
+        {
+            <td class="background-pupa" width="48px" height="48px"></td>
+        }
+        else if ((entidade as Mosquito).Estagio == Estagio.Larva)
+        {
+            <td class="background-larva" width="48px" height="48px"></td>
+        }
+        else if ((entidade as Mosquito).Estagio == Estagio.Adulto && entidade.TipoEntidade == TipoClasse.MosquitoMacho)
+        {
+            <td class="background-adulto-macho" width="48px" height="48px"></td>
+        }
+        else if ((entidade as Mosquito).Estagio == Estagio.Adulto && entidade.TipoEntidade == TipoClasse.MosquitoFemea)
+        {
+            <td class="background-adulto-femea" width="48px" height="48px"></td>
+        }
+    }
+}
+<div class="table-responsive">
+    <table class="table table-bordered">
+        @for (int linha = 0; linha < Model.GetLength(0); linha++)
+        {
+            <tr class="active">
+                @for (int coluna = 0; coluna < Model.GetLength(1); coluna++)
+                {
+                    if (Model[linha, coluna] != null)
+                    {
+                        @ImprimeEntidade(Model[linha, coluna])
+                    }
+                    else
+                    {
+                        <td width="48px" height="48px"></td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+</div>
