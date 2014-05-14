@@ -41,7 +41,7 @@ namespace secret_adventure.Models.Manager
                     {
                         if (entidade is Mosquito)
                         {
-                            this.Fugir(entidade);
+                            this.Fugir(entidade as Pessoa);
                             houveInteracao = true;
                         }
                     }

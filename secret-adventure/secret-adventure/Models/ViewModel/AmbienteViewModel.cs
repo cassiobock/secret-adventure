@@ -18,10 +18,10 @@ namespace secret_adventure.Models.ViewModel
         [DisplayName("Número de Mosquitos")]
         [Required(ErrorMessage = "Você deve preencher o número de Mosquitos!")]
         public int NumeroMosquitos { get; set; }
-        [DisplayName("Número de pessoas")]
+        [DisplayName("Número de Pessoas")]
         [Required(ErrorMessage = "Você deve preencher o número de Pessoas!")]
         public int NumeroPessoas { get; set; }
-        [DisplayName("Número de Agente")]
+        [DisplayName("Número de Agentes")]
         [Required(ErrorMessage = "Você deve preencher o número de Agentes!")]
         public int NumeroAgentes { get; set; }
     }
