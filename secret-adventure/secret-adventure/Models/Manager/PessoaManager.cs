@@ -116,7 +116,7 @@ namespace secret_adventure.Models.Manager
             {
                 switch (this.Pessoa.RodadasDoente)
                 {
-                    // Se já passou 8 rodadas, torna a pessoa saldavel
+                    // Se já passou 8 rodadas, torna a pessoa saudavel
                     case 0:
                         this.Pessoa.Saudavel = true;
                         break;
