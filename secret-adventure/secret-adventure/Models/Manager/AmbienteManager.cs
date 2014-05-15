@@ -32,6 +32,11 @@ namespace secret_adventure.Models.Manager
             return this.Ambiente.Entidades;
         }
 
+        public List<Entidade> GetListaEntidades(TipoClasse tipoClasse)
+        {
+            return this.Ambiente.Entidades.Where(m => m.TipoEntidade == tipoClasse).ToList();
+        }
+
         /// <summary>
         /// Retorna entidades que serão adicionadas na fila
         /// </summary>
