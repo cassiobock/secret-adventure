@@ -15,6 +15,7 @@ namespace secret_adventure.Controllers.Api
     public class PessoaController : ApiController
     {
         // GET api/pessoa
+
         public IEnumerable<PessoaViewModel> Get()
         {
             List<Entidade> pessoas = new AmbienteManager(Singleton.GetInstance()).GetListaEntidades(TipoClasse.Pessoa);
