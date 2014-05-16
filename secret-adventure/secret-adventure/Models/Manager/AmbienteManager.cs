@@ -60,6 +60,11 @@ namespace secret_adventure.Models.Manager
             return matriz;
         }
 
+        public Entidade GetEntidade(string id)
+        {
+            return this.GetListaEntidades().Find(m => m.Id.Equals(id));
+        }
+
         /// <summary>
         /// Adiciona entidades no ambiente
         /// </summary>

@@ -29,9 +29,11 @@ namespace secret_adventure.Controllers.Api
         }
 
         // GET api/pessoa/5
-        public string Get(int id)
+        public PessoaViewModel Get(string id)
         {
-            return "value";
+            Entidade entidade = new AmbienteManager(Singleton.GetInstance()).GetEntidade(id);
+            PessoaViewModel pessoa = new PessoaViewModel(entidade as Pessoa);
+            return pessoa;
         }
 
     }
