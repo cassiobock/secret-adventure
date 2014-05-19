@@ -20,7 +20,7 @@
         $("#mover").on("click", function () {
             $.ajax({
                 url: "/Ambiente/Mover",
-                type: "GET"
+                type: "POST"
             })
             .done(function (partialViewResult) {
                 $("#ambiente").html(partialViewResult);
