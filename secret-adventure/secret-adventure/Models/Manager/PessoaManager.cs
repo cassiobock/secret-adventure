@@ -39,7 +39,7 @@ namespace secret_adventure.Models.Manager
                     entidadesProximas = ambiente.GetEntidadesProximas(this.Pessoa, nivel);
                     foreach (var entidade in entidadesProximas)
                     {
-                        if (entidade is Mosquito)
+                        if (entidade is Mosquito && houveInteracao == false)
                         {
                             this.Fugir(entidade as Mosquito);
                             houveInteracao = true;
