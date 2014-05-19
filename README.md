@@ -2,17 +2,17 @@ Secret Adventure
 ================
 
 **Entidade**   
-- Anda 1 casa por vez e não pode pular casas com agentes
-- ~~Enxerga a 3 casas de distancia~~
-- ~~Anda randomicamente~~
+- [ ] Anda 1 casa por vez e não pode pular casas com agentes
+- [ ] Enxerga a 3 casas de distancia
+- [ ] Anda randomicamente
 	
 **Pessoas**
-- ~~Se doente, deve ter outro ícone~~
-- ~~Não pegam o mesmo tipo de dengue que já tiveram~~
-- ~~Não podem ter duas dengues ao mesmo tempo~~
-- ~~Chance de 50% de morrer se a dengue for hemorrágica~~
-- ~~Fogem de mosquitos~~
-- ~~Ficam 8 rodadas doentes~~
+- [ ] Se doente, deve ter outro ícone
+- [ ] Não pegam o mesmo tipo de dengue que já tiveram
+- [ ] Não podem ter duas dengues ao mesmo tempo
+- [ ] Chance de 50% de morrer se a dengue for hemorrágica
+- [ ] Fogem de mosquitos
+- [ ] Ficam 8 rodadas doentes
 
 **Mosquitos**
 - Quatro tipos: 
