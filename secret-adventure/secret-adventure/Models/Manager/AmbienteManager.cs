@@ -32,6 +32,11 @@ namespace secret_adventure.Models.Manager
             return this.Ambiente.Entidades;
         }
 
+        public List<Entidade> GetListaEntidades(TipoClasse tipoClasse)
+        {
+            return this.Ambiente.Entidades.Where(m => m.TipoEntidade == tipoClasse).ToList();
+        }
+
         /// <summary>
         /// Retorna entidades que serão adicionadas na fila
         /// </summary>
@@ -53,6 +58,11 @@ namespace secret_adventure.Models.Manager
                 matriz[entidade.Posicao.X, entidade.Posicao.Y] = entidade;
             }
             return matriz;
+        }
+
+        public Entidade GetEntidade(string id)
+        {
+            return this.GetListaEntidades().Find(m => m.Id.Equals(id));
         }
 
         /// <summary>
