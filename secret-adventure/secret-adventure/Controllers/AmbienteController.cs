@@ -22,7 +22,8 @@ namespace secret_adventure.Controllers
         }
 
         //
-        // GET: /Tabuleiro/Mover
+        // POST: /Tabuleiro/Mover
+        [HttpPost]
         public ActionResult Mover()
         {
             AmbienteManager manager = new AmbienteManager(Singleton.GetInstance());
