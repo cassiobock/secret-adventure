@@ -2,7 +2,7 @@ Secret Adventure
 ================
 
 **Entidade**   
-- [ ] Anda 1 casa por vez e não pode pular casas com agentes
+- [x] Anda 1 casa por vez e não pode pular casas com agentes
 - [x] Enxerga a 3 casas de distancia
 - [x] Anda randomicamente
 	
@@ -11,7 +11,7 @@ Secret Adventure
 - [x] Não pegam o mesmo tipo de dengue que já tiveram
 - [x] Não podem ter duas dengues ao mesmo tempo
 - [x] Chance de 50% de morrer se a dengue for hemorrágica
-- [ ] Fogem de mosquitos
+- [x] Fogem de mosquitos
 - [x] Ficam 8 rodadas doentes
 
 **Mosquitos**
