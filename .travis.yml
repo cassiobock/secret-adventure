@@ -1,2 +1,2 @@
 language: csharp
-solution: secret-adventure.sln
+solution: secret-adventure/secret-adventure.sln
